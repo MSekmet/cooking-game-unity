@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System;
 
-public class ContainerCounter : BaseCounter, IKitchenObjectParent
+public class ContainerCounter : BaseCounter
 {
 
     public event EventHandler OnPlayerGrabbedObject;
@@ -14,8 +14,7 @@ public class ContainerCounter : BaseCounter, IKitchenObjectParent
         if (!player.HasKitchenObject())
         {
             // player is not carrying anything
-            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+            KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
             
